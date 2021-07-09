@@ -16,7 +16,7 @@ public class Menu {
 
             while(go_on)
             {
-                System.out.println("MENU'");
+                System.out.println("-------->MENU<--------'");
                 System.out.println(" (1) Enter new order ");
                 System.out.println(" (2) Order list ");
                 System.out.println(" (3) End of work shift");
@@ -40,6 +40,7 @@ public class Menu {
                         to_server.println(choice);
                         to_server.flush();
                         CommandsArchive archive = (CommandsArchive) in.readObject();
+                        System.out.println("Getting order list for waiter:" + archive.getWaiter());
                         System.out.println(archive.getTotalCommands().toString());
 
                         break;
@@ -47,7 +48,10 @@ public class Menu {
                         System.out.println("END OF WORK SHIFT NOT IMPLEMENTED!");
                         break;
                     case 0:
-                        //to_server.println("COMMAND_QUIT");
+                        System.out.println("Closing connection with kitchen server: "+server);
+                        to_server.println(choice);
+                        to_server.flush();
+                        server.close();
                         go_on=false;
                         break;
                 }

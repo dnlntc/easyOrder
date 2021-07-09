@@ -21,17 +21,8 @@ public class WaiterClient {
     }
     public void start(Socket server) {
         Menu startMenu = new Menu();
-        try
-        {
+        startMenu.renderMenu(server);
+        System.out.println("Closing easyOrder...");
 
-            startMenu.renderMenu(server);
-
-            server.close();
-            System.out.println("Quitting connection...");
-
-        } catch (IOException e) {
-            System.out.println("Cannot connect to server kitchen with IP: "+server_ipAddress);
-            e.printStackTrace();
-        }
     }
 }

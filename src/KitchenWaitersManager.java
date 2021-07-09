@@ -32,17 +32,21 @@ public class KitchenWaitersManager implements Runnable {
                         out.writeObject("OK");
                         out.flush();
                         out.reset();
+                        System.out.println("ORDER FROM WAITER:"+archive.getWaiter()+"INSERTED");
                         break;
                     case 2:
                         out.writeObject(archive);
                         out.flush();
+                        System.out.println("ORDER LIST SEND TO:"+waiter);
                         break;
                     case 3:
                         System.out.println("END WORK SAVE ALL-  TO BE IMPLEMENTED");
                         break;
                     case 0:
                         try {
+                            System.out.println("Request to close connection from:" + waiter);
                             waiter.close();
+                            System.out.println("System CLOSED");
                             go_on=false;
                         } catch (IOException e) {
                             e.printStackTrace();

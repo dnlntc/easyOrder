@@ -9,6 +9,10 @@ public class CommandsArchive implements Serializable {
     private ArrayList<Commands> totalCommands;
     private String waiter;
 
+    public String getWaiter() {
+        return waiter;
+    }
+
     public CommandsArchive(String waiterTabletAddress){
         date= Calendar.getInstance();
         waiter = waiterTabletAddress;
@@ -20,9 +24,6 @@ public class CommandsArchive implements Serializable {
     }
     public ArrayList<Commands> getTotalCommands(){
         return totalCommands;
-        /*for (Commands c: totalCommands) {
-            System.out.println("---> "+c);
-        }*/
     }
 
     @Override
