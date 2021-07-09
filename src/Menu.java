@@ -45,7 +45,10 @@ public class Menu {
 
                         break;
                     case 3:
-                        System.out.println("END OF WORK SHIFT NOT IMPLEMENTED!");
+                        to_server.println(choice);
+                        to_server.flush();
+                        answer_fromServer = (String) in.readObject();
+                        System.out.println(answer_fromServer);
                         break;
                     case 0:
                         System.out.println("Closing connection with kitchen server: "+server);

@@ -22,6 +22,7 @@ public class KitchenWaitersManager implements Runnable {
             boolean go_on=true;
             Commands command_fromWaiter;
             int choice;
+            CommandsArchiveManager archiveManager =new CommandsArchiveManager();
 
             while(go_on){
                 choice = from_waiter.nextInt();
@@ -37,10 +38,14 @@ public class KitchenWaitersManager implements Runnable {
                     case 2:
                         out.writeObject(archive);
                         out.flush();
+                        out.reset();
                         System.out.println("ORDER LIST SEND TO:"+waiter);
                         break;
                     case 3:
-                        System.out.println("END WORK SAVE ALL-  TO BE IMPLEMENTED");
+                        archiveManager.saveArchiveToStorage(archive);
+                        out.writeObject(archiveManager.saveArchiveToStorage(archive)?"ORDER LIST SAVED ON STORAGE":"ERROR DURING SAVING ARCHIVE");
+                        out.flush();
+                        out.reset();
                         break;
                     case 0:
                         try {

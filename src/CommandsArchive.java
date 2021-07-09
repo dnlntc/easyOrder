@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 public class CommandsArchive implements Serializable {
+
+
     private Calendar date;
     private ArrayList<Commands> totalCommands;
     private String waiter;
@@ -24,6 +26,9 @@ public class CommandsArchive implements Serializable {
     }
     public ArrayList<Commands> getTotalCommands(){
         return totalCommands;
+    }
+    public Calendar getDate() {
+        return date;
     }
 
     @Override
