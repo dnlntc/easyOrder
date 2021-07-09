@@ -4,48 +4,58 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public boolean renderMenu (Socket server) {
+    public void renderMenu (Socket server) {
         try {
             ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
-            //ObjectInputStream in = new ObjectInputStream(server.getInputStream());
-            Scanner from_server = new Scanner(server.getInputStream());
-            var to_server = new PrintWriter(server.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(server.getInputStream());
+            //Scanner from_server = new Scanner(server.getInputStream());
+            PrintWriter to_server = new PrintWriter(server.getOutputStream());
             Scanner input_fromUser = new Scanner(System.in);
             String answer_fromServer;
-            System.out.println("MENU'");
-            System.out.println(" (1) Enter new order ");
-            System.out.println(" (2) Order list ");
-            System.out.println(" (3) End of work shift");
-            System.out.println(" (0) Close Easy Order environment");
-            System.out.println("-----------------------------------------");
-            System.out.print(" Insert choice:");
-            switch (input_fromUser.nextInt())
+            boolean go_on = true;
+
+            while(go_on)
             {
-                case 1:
-                    var toSend = insert_newOrder();
-                    System.out.println("Sending order to kitchen server" + server.getRemoteSocketAddress());
-                    //to_server.println("1");
-                    //to_server.flush();
-                    toSend.selection=1;
-                    out.writeObject(toSend);
-                    out.flush();
-                    answer_fromServer = from_server.nextLine();
-                    System.out.println(answer_fromServer);
-                    break;
-                case 2:
-                    System.out.println("ORDER LIST NOT IMPLEMENTED!");
-                    break;
-                case 3:
-                    System.out.println("END OF WORK SHIFT NOT IMPLEMENTED!");
-                    break;
-                case 0:
-                    to_server.println("COMMAND_QUIT");
-                    return false;
+                System.out.println("MENU'");
+                System.out.println(" (1) Enter new order ");
+                System.out.println(" (2) Order list ");
+                System.out.println(" (3) End of work shift");
+                System.out.println(" (0) Close Easy Order environment");
+                System.out.println("-----------------------------------------");
+                System.out.print(" Insert choice:");
+                int choice= input_fromUser.nextInt();
+                switch (choice)
+                {
+                    case 1:
+                        var toSend = insert_newOrder();
+                        System.out.println("Sending order to kitchen server" + server.getRemoteSocketAddress());
+                        to_server.println(choice);
+                        to_server.flush();
+                        out.writeObject(toSend);
+                        out.flush();
+                        answer_fromServer = (String) in.readObject();
+                        System.out.println(answer_fromServer);
+                        break;
+                    case 2:
+                        to_server.println(choice);
+                        to_server.flush();
+                        CommandsArchive archive = (CommandsArchive) in.readObject();
+                        System.out.println(archive.getTotalCommands().toString());
+
+                        break;
+                    case 3:
+                        System.out.println("END OF WORK SHIFT NOT IMPLEMENTED!");
+                        break;
+                    case 0:
+                        //to_server.println("COMMAND_QUIT");
+                        go_on=false;
+                        break;
+                }
             }
-        } catch (IOException e) {
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return true;
     }
     private int renderOptions() {
         Scanner toReturn =new Scanner(System.in);

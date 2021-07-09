@@ -39,4 +39,17 @@ public class Commands implements Serializable {
     public void addDessert(int b) {
         desserts.add(b);
     }
+    public String getElementOfArray (ArrayList<Integer> array)
+    {
+        String toReturn=" ";
+        for (Integer c: array) {
+            toReturn= toReturn+"  "+c.toString();
+        }
+        return toReturn;
+    }
+
+    @Override
+    public String toString() {
+        return "Table number: "+ tableNumber+" Beverage selection: "+ getElementOfArray(beverage) + " Starters selection: " + getElementOfArray(starters) + " Main course selection: " + getElementOfArray(mainCourse) + " Second course selection: "+ getElementOfArray(secondCourse) + " Dessert selection: "+ getElementOfArray(desserts) +"\n\n";
+    }
 }

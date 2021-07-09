@@ -15,23 +15,27 @@ public class KitchenWaitersManager implements Runnable {
     public void run() {
         try {
             Scanner from_waiter= new Scanner(waiter.getInputStream());
-            PrintWriter to_waiter =new PrintWriter(waiter.getOutputStream());
+            //PrintWriter to_waiter =new PrintWriter(waiter.getOutputStream());
 
             ObjectOutputStream out = new ObjectOutputStream(waiter.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(waiter.getInputStream());
             boolean go_on=true;
             Commands command_fromWaiter;
-            command_fromWaiter =(Commands) in.readObject();
             int choice;
+
             while(go_on){
-                choice = command_fromWaiter.selection;
+                choice = from_waiter.nextInt();
                 switch (choice){
                     case 1:
-                        to_waiter.println("OK");
-                        to_waiter.flush();
+                        command_fromWaiter =(Commands) in.readObject();
+                        archive.add(command_fromWaiter);
+                        out.writeObject("OK");
+                        out.flush();
+                        out.reset();
                         break;
                     case 2:
-                        System.out.println("LISTA ORDINI EFFETTUATI - TO BE IMPLEMENTED");
+                        out.writeObject(archive);
+                        out.flush();
                         break;
                     case 3:
                         System.out.println("END WORK SAVE ALL-  TO BE IMPLEMENTED");
@@ -52,4 +56,6 @@ public class KitchenWaitersManager implements Runnable {
 
 
     }
+
+
 }

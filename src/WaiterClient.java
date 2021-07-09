@@ -23,10 +23,9 @@ public class WaiterClient {
         Menu startMenu = new Menu();
         try
         {
-            boolean go_on = true;
-            while (go_on) {
-                go_on= startMenu.renderMenu(server);
-            }
+
+            startMenu.renderMenu(server);
+
             server.close();
             System.out.println("Quitting connection...");
 
