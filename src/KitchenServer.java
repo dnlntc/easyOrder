@@ -20,11 +20,10 @@ public class KitchenServer {
             while(true){
                 waiterClientSocket = kitchenServerSocket.accept();
                 waiterCode= waiterClientSocket.getRemoteSocketAddress().toString();
-                System.out.println("Accepted connection from client "+waiterClientSocket.getRemoteSocketAddress());
+                System.out.println("Accepted connection from client "+waiterCode);
                 KitchenWaitersManager kitchenWaitersManager = new KitchenWaitersManager(waiterClientSocket);
                 Thread t = new Thread(kitchenWaitersManager, waiterCode);
                 t.start();
-
             }
 
         } catch (IOException e) {

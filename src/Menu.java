@@ -19,7 +19,8 @@ public class Menu {
                 System.out.println("-------->MENU<--------'");
                 System.out.println(" (1) Enter new order ");
                 System.out.println(" (2) Order list ");
-                System.out.println(" (3) End of work shift");
+                System.out.println(" (3) End of work shift and save commands to storage");
+                System.out.println(" (4) Reload command from storage");
                 System.out.println(" (0) Close Easy Order environment");
                 System.out.println("-----------------------------------------");
                 System.out.print(" Insert choice:");
@@ -42,11 +43,21 @@ public class Menu {
                         CommandsArchive archive = (CommandsArchive) in.readObject();
                         System.out.println("Getting order list for waiter:" + archive.getWaiter());
                         System.out.println(archive.getTotalCommands().toString());
-
                         break;
                     case 3:
                         to_server.println(choice);
                         to_server.flush();
+                        answer_fromServer = (String) in.readObject();
+                        System.out.println(answer_fromServer);
+                        break;
+                    case 4:
+                        System.out.println("Please insert the name of commands archive to restore EX:'yyyy-mm-dd_archiveCommands.dat' \n -->");
+                        Scanner scanName = new Scanner(System.in);
+                        String fileName=scanName.nextLine();
+                        to_server.println(choice);
+                        to_server.flush();
+                        out.writeObject(fileName);
+                        out.flush();
                         answer_fromServer = (String) in.readObject();
                         System.out.println(answer_fromServer);
                         break;

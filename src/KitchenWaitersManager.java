@@ -33,7 +33,7 @@ public class KitchenWaitersManager implements Runnable {
                         out.writeObject("OK");
                         out.flush();
                         out.reset();
-                        System.out.println("ORDER FROM WAITER:"+archive.getWaiter()+"INSERTED");
+                        System.out.println("ORDER FROM WAITER: "+archive.getWaiter()+" "+waiter.getRemoteSocketAddress()+" INSERTED");
                         break;
                     case 2:
                         out.writeObject(archive);
@@ -44,6 +44,13 @@ public class KitchenWaitersManager implements Runnable {
                     case 3:
                         archiveManager.saveArchiveToStorage(archive);
                         out.writeObject(archiveManager.saveArchiveToStorage(archive)?"ORDER LIST SAVED ON STORAGE":"ERROR DURING SAVING ARCHIVE");
+                        out.flush();
+                        out.reset();
+                        break;
+                    case 4:
+                        String fileName= (String) in.readObject();
+                        archive= archiveManager.loadArchiveFromStorage(fileName);
+                        out.writeObject("ORDER LIST RESTORED FROM FILE STORAGE");
                         out.flush();
                         out.reset();
                         break;
