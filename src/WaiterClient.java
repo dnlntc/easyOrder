@@ -18,7 +18,7 @@ public class WaiterClient {
             e.printStackTrace();
         }
         start(waiter_clientSocket);
-    }
+     }
     public void start(Socket server) {
         Menu startMenu = new Menu();
         startMenu.renderMenu(server);

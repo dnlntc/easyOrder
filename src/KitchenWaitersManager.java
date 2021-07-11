@@ -15,8 +15,6 @@ public class KitchenWaitersManager implements Runnable {
     public void run() {
         try {
             Scanner from_waiter= new Scanner(waiter.getInputStream());
-            //PrintWriter to_waiter =new PrintWriter(waiter.getOutputStream());
-
             ObjectOutputStream out = new ObjectOutputStream(waiter.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(waiter.getInputStream());
             boolean go_on=true;

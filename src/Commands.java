@@ -2,8 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Commands implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private int tableNumber;
-    public int selection;
     private ArrayList<Integer> beverage;
     private ArrayList<Integer> starters;
     private ArrayList<Integer> mainCourse;

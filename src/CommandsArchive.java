@@ -3,18 +3,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+
 
 public class CommandsArchive implements Serializable {
-
-
+    private static final long serialVersionUID = 6529685098267757691L;
     private Date date;
     private ArrayList<Commands> totalCommands;
     private String waiter;
-
-    public String getWaiter() {
-        return waiter;
-    }
 
     public CommandsArchive(String waiterTabletAddress){
         date= Calendar.getInstance().getTime();
@@ -23,6 +18,9 @@ public class CommandsArchive implements Serializable {
 
     }
 
+    public String getWaiter() {
+        return waiter;
+    }
     public void add(Commands c) {
         totalCommands.add(c);
     }
