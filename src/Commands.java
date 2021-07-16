@@ -27,7 +27,7 @@ public class Commands implements Serializable {
     }
 
     public void setTotalPrice(float totalPrice) {
-        this.totalPrice= totalPrice;
+        this.totalPrice+= totalPrice;
     }
     public int getTableNumber() {
         return tableNumber;
