@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+
 public class CommandsArchiveManager {
 
     public boolean saveArchiveToStorage (CommandsArchive archive)
@@ -36,5 +38,16 @@ public class CommandsArchiveManager {
         }
 
         return archiveRestored;
+    }
+    public Commands getCommandsFromArchive(CommandsArchive archive, int tableNumberCommand)
+    {
+        ArrayList<Commands> listOfcommands = archive.getTotalCommands();
+        Commands toReturn=null;
+        for(int i=0; i<listOfcommands.size();i++)
+        {
+            if(listOfcommands.get(i).getTableNumber() ==tableNumberCommand)
+                return toReturn=listOfcommands.get(i);
+        }
+        return null;
     }
 }

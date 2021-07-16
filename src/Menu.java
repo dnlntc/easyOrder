@@ -21,6 +21,7 @@ public class Menu {
                 System.out.println(" (2) Order list ");
                 System.out.println(" (3) End of work shift and save commands to storage");
                 System.out.println(" (4) Reload command from storage");
+                System.out.println(" (5) Get account for table number");
                 System.out.println(" (0) Close Easy Order environment");
                 System.out.println("-----------------------------------------");
                 System.out.print(" Insert choice:");
@@ -61,6 +62,20 @@ public class Menu {
                         answer_fromServer = (String) in.readObject();
                         System.out.println(answer_fromServer);
                         break;
+                    case 5:
+                        to_server.println(choice);
+                        to_server.flush();
+
+                        System.out.println("Please insert the TABLE NUMBER for which you want to have the account -->");
+                        Scanner scanTableNumber = new Scanner(System.in);
+                        int tableNumber=scanTableNumber.nextInt();
+
+                        out.writeObject(tableNumber);
+                        out.flush();
+
+                        Commands commands = (Commands) in.readObject();
+                        System.out.println("YOUR ACCOUNT: \n\n" + commands.toString() +" "+ commands.getTotalPrice());
+                        break;
                     case 0:
                         System.out.println("Closing connection with kitchen server: "+server);
                         to_server.println(choice);
@@ -93,50 +108,61 @@ public class Menu {
         Scanner numTable = new Scanner(System.in);
         System.out.print("Insert Table number: ");
         newCommand.setTableNumber(numTable.nextInt());
+        int choice;
         boolean repeat= true;
         while(repeat) {
             int menuSection=renderOptions();
             Scanner inp = new Scanner(System.in);
             switch (menuSection) {
                 case 1:
-                    System.out.println(" (1) Mineral water ");
-                    System.out.println(" (2) Sparkling water ");
-                    System.out.println(" (3) Coca-Cola ");
-                    System.out.println(" (4) Wine");
+                    System.out.println(" (1) Mineral water 1.50$");
+                    System.out.println(" (2) Sparkling water 2.00$");
+                    System.out.println(" (3) Coca-Cola 2.50$");
+                    System.out.println(" (4) Wine 5.00$");
                     System.out.print(" Choice: ");
-                    newCommand.addBeverage(inp.nextInt());
+                    choice= inp.nextInt();
+                    newCommand.addBeverage(choice);
+                    newCommand.setTotalPrice(getPrice(menuSection,choice));
                     break;
                 case 2:
-                    System.out.println(" (1) Bruschette");
-                    System.out.println(" (2) Patatine fritte ");
-                    System.out.println(" (3) Insalata ");
-                    System.out.println(" (4) Panelle");
+                    System.out.println(" (1) Bruschette 4.50$");
+                    System.out.println(" (2) Patatine fritte 3.00$");
+                    System.out.println(" (3) Insalata 5.00$");
+                    System.out.println(" (4) Panelle 5.00$");
                     System.out.print(" Choice: ");
-                    newCommand.addStarter(inp.nextInt());
+                    choice= inp.nextInt();
+                    newCommand.addStarter(choice);
+                    newCommand.setTotalPrice(getPrice(menuSection,choice));
                     break;
                 case 3:
-                    System.out.println(" (1) Pasta alla Carbonara ");
-                    System.out.println(" (2) Pasta al ragù ");
-                    System.out.println(" (3) Casarecce al pistacchio ");
-                    System.out.println(" (4) Tortellini in brodo");
+                    System.out.println(" (1) Pasta alla Carbonara 9.00$");
+                    System.out.println(" (2) Pasta al ragù 8.00$");
+                    System.out.println(" (3) Casarecce al pistacchio 10.00$");
+                    System.out.println(" (4) Tortellini in brodo 7.00$");
                     System.out.print(" Choice: ");
-                    newCommand.addMain(inp.nextInt());
+                    choice= inp.nextInt();
+                    newCommand.addMain(choice);
+                    newCommand.setTotalPrice(getPrice(menuSection,choice));
                     break;
                 case 4:
-                    System.out.println(" (1) Cotoletta alla milanese ");
-                    System.out.println(" (2) Grigliata mista ");
-                    System.out.println(" (3) Filetto con contorno di insalata ");
-                    System.out.println(" (4) Involtini alla messinese");
+                    System.out.println(" (1) Cotoletta alla milanese 7.00$");
+                    System.out.println(" (2) Grigliata mista 15.00$");
+                    System.out.println(" (3) Filetto con contorno di insalata 12.00$");
+                    System.out.println(" (4) Involtini alla messinese 13.00$");
                     System.out.print(" Choice: ");
-                    newCommand.addSecond(inp.nextInt());
+                    choice= inp.nextInt();
+                    newCommand.addSecond(choice);
+                    newCommand.setTotalPrice(getPrice(menuSection,choice));
                     break;
                 case 5:
-                    System.out.println(" (1) Gelo alla cannella");
-                    System.out.println(" (2) Sorbetto al limone");
-                    System.out.println(" (3) Cuore caldo al cioccolato");
-                    System.out.println(" (4) Frutta fresca e gelato");
+                    System.out.println(" (1) Gelo alla cannella 7.00$");
+                    System.out.println(" (2) Sorbetto al limone 4,50$");
+                    System.out.println(" (3) Cuore caldo al cioccolato 6.00$");
+                    System.out.println(" (4) Frutta fresca e gelato 4.00$");
                     System.out.print(" Choice: ");
-                    newCommand.addDessert(inp.nextInt());
+                    choice= inp.nextInt();
+                    newCommand.addDessert(choice);
+                    newCommand.setTotalPrice(getPrice(menuSection,choice));
                     break;
                 case 0:
                     System.out.println("Sending order to the kitchen..");
@@ -144,5 +170,77 @@ public class Menu {
             }
         }
         return newCommand;
+    }
+
+    private float getPrice(int menuSelection, int numOrder)
+    {
+        float totalPrice=0;
+        switch (menuSelection)
+        {
+            case 1:
+                if(numOrder ==1)
+                    totalPrice+=1.50;
+                else if(numOrder ==2)
+                    totalPrice+=2.50;
+                else if(numOrder==3)
+                    totalPrice+=3.50;
+                else if(numOrder==4)
+                    totalPrice+=5.00;
+                else
+                    totalPrice+=5.00;
+                break;
+            case 2:
+                if(numOrder ==1)
+                    totalPrice+=1.50;
+                else if(numOrder ==2)
+                    totalPrice+=2.50;
+                else if(numOrder==3)
+                    totalPrice+=3.50;
+                else if(numOrder==4)
+                    totalPrice+=5.00;
+                else
+                    totalPrice+=5.00;
+                break;
+            case 3:
+                if(numOrder ==1)
+                    totalPrice+=1.50;
+                else if(numOrder ==2)
+                    totalPrice+=2.50;
+                else if(numOrder==3)
+                    totalPrice+=3.50;
+                else if(numOrder==4)
+                    totalPrice+=5.00;
+                else
+                    totalPrice+=5.00;
+                break;
+            case 4:
+                if(numOrder ==1)
+                    totalPrice+=1.50;
+                else if(numOrder ==2)
+                    totalPrice+=2.50;
+                else if(numOrder==3)
+                    totalPrice+=3.50;
+                else if(numOrder==4)
+                    totalPrice+=5.00;
+                else
+                    totalPrice+=5.00;
+                break;
+            case 5:
+                if(numOrder ==1)
+                    totalPrice+=1.50;
+                else if(numOrder ==2)
+                    totalPrice+=2.50;
+                else if(numOrder==3)
+                    totalPrice+=3.50;
+                else if(numOrder==4)
+                    totalPrice+=5.00;
+                else
+                    totalPrice+=5.00;
+                break;
+            case 0:
+                totalPrice=0;
+                break;
+        }
+        return totalPrice;
     }
 }

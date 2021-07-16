@@ -4,6 +4,10 @@ import java.util.ArrayList;
 public class Commands implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
     private int tableNumber;
+
+
+
+    private float totalPrice;
     private ArrayList<Integer> beverage;
     private ArrayList<Integer> starters;
     private ArrayList<Integer> mainCourse;
@@ -16,11 +20,18 @@ public class Commands implements Serializable {
         mainCourse = new ArrayList<>();
         secondCourse = new ArrayList<>();
         desserts = new ArrayList<>();
+        totalPrice=0;
+    }
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
     }
     public int getTableNumber() {
         return tableNumber;
     }
-
     public void setTableNumber(int tableNumber) {
         this.tableNumber = tableNumber;
     }
@@ -50,6 +61,6 @@ public class Commands implements Serializable {
 
     @Override
     public String toString() {
-        return "Table number: "+ tableNumber+" Beverage selection: "+ getElementOfArray(beverage) + " Starters selection: " + getElementOfArray(starters) + " Main course selection: " + getElementOfArray(mainCourse) + " Second course selection: "+ getElementOfArray(secondCourse) + " Dessert selection: "+ getElementOfArray(desserts) +"\n\n";
+        return "Table number: "+ tableNumber+"\n\n" +" Beverage selection: "+ getElementOfArray(beverage) + " Starters selection: " + getElementOfArray(starters) +"\n\n"+ " Main course selection: " + getElementOfArray(mainCourse) + " Second course selection: "+ getElementOfArray(secondCourse) + "\n\n"+" Dessert selection: "+ getElementOfArray(desserts) +"\n\n";
     }
 }

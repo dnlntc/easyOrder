@@ -52,6 +52,14 @@ public class KitchenWaitersManager implements Runnable {
                         out.flush();
                         out.reset();
                         break;
+                    case 5:
+                        int tableNumber= (int) in.readObject();
+                        Commands toReturn = archiveManager.getCommandsFromArchive(archive, tableNumber);
+                        out.writeObject(toReturn);
+                        out.flush();
+                        out.reset();
+                        System.out.println("ARCHIVE SENT TO:"+waiter);
+                        break;
                     case 0:
                         try {
                             System.out.println("Request to close connection from:" + waiter);
