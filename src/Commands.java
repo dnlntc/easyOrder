@@ -7,7 +7,7 @@ public class Commands implements Serializable {
 
 
 
-    private float totalPrice;
+    private static float totalPrice;
     private ArrayList<Integer> beverage;
     private ArrayList<Integer> starters;
     private ArrayList<Integer> mainCourse;
@@ -27,7 +27,7 @@ public class Commands implements Serializable {
     }
 
     public void setTotalPrice(float totalPrice) {
-        totalPrice+= totalPrice;
+        this.totalPrice= totalPrice;
     }
     public int getTableNumber() {
         return tableNumber;
