@@ -58,7 +58,7 @@ public class KitchenWaitersManager implements Runnable {
                         out.writeObject(toReturn);
                         out.flush();
                         out.reset();
-                        System.out.println("ARCHIVE SENT TO:"+waiter);
+                        System.out.println("ACCOUNT SENT TO:"+waiter);
                         break;
                     case 0:
                         try {
