@@ -74,7 +74,7 @@ public class Menu {
                         out.flush();
 
                         Commands commands = (Commands) in.readObject();
-                        System.out.println("YOUR ACCOUNT: \n\n" + commands.toString() +" "+ commands.getTotalPrice());
+                        System.out.println("YOUR ACCOUNT: \n\n" + commands.toString() +"  YOU HAVE TO PAY: "+ commands.getTotalPrice()+"$");
                         break;
                     case 0:
                         System.out.println("Closing connection with kitchen server: "+server);
@@ -187,55 +187,55 @@ public class Menu {
                 else if(numOrder==4)
                     totalPrice+=5.00;
                 else
-                    totalPrice+=5.00;
+                    totalPrice+=0.00;
                 break;
             case 2:
                 if(numOrder ==1)
-                    totalPrice+=1.50;
+                    totalPrice+=4.50;
                 else if(numOrder ==2)
-                    totalPrice+=2.50;
+                    totalPrice+=3.00;
                 else if(numOrder==3)
-                    totalPrice+=3.50;
+                    totalPrice+=5.00;
                 else if(numOrder==4)
                     totalPrice+=5.00;
                 else
-                    totalPrice+=5.00;
+                    totalPrice+=0.00;
                 break;
             case 3:
                 if(numOrder ==1)
-                    totalPrice+=1.50;
+                    totalPrice+=9.00;
                 else if(numOrder ==2)
-                    totalPrice+=2.50;
+                    totalPrice+=8.00;
                 else if(numOrder==3)
-                    totalPrice+=3.50;
+                    totalPrice+=10.00;
                 else if(numOrder==4)
-                    totalPrice+=5.00;
+                    totalPrice+=7.00;
                 else
-                    totalPrice+=5.00;
+                    totalPrice+=0.00;
                 break;
             case 4:
                 if(numOrder ==1)
-                    totalPrice+=1.50;
+                    totalPrice+=7.00;
                 else if(numOrder ==2)
-                    totalPrice+=2.50;
+                    totalPrice+=15.00;
                 else if(numOrder==3)
-                    totalPrice+=3.50;
+                    totalPrice+=12.00;
                 else if(numOrder==4)
-                    totalPrice+=5.00;
+                    totalPrice+=13.00;
                 else
-                    totalPrice+=5.00;
+                    totalPrice+=0.00;
                 break;
             case 5:
                 if(numOrder ==1)
-                    totalPrice+=1.50;
+                    totalPrice+=7.00;
                 else if(numOrder ==2)
-                    totalPrice+=2.50;
+                    totalPrice+=4.50;
                 else if(numOrder==3)
-                    totalPrice+=3.50;
+                    totalPrice+=6.00;
                 else if(numOrder==4)
-                    totalPrice+=5.00;
+                    totalPrice+=4.00;
                 else
-                    totalPrice+=5.00;
+                    totalPrice+=0.00;
                 break;
             case 0:
                 totalPrice=0;
